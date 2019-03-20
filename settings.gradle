@@ -1,0 +1,1 @@
+include ':app', ':EScmApi', ':EScmComplier', ':EScmAnnotations', ':welcome'

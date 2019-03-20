@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api "com.squareup:javapoet:${thridLibs.javapoet}"
+    compile project(path: ':EScmAnnotations')
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
