@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.yqing.annotations.ScActionAnnotation;
-import com.yqing.serverCenter.ScAction;
-import com.yqing.serverCenter.ScCallBack;
-import com.yqing.server_center.ActionConstants;
+import com.yqing.servercenter.ScAction;
+import com.yqing.servercenter.ScCallBack;
 
 import mayn.demo10.MainActivity;
 
@@ -16,7 +15,7 @@ import mayn.demo10.MainActivity;
  * author: Y_Qing
  * date: 2019/1/14
  */
-@ScActionAnnotation(ActionConstants.ACTION_ENTRY_HOME_PAGE)
+@ScActionAnnotation(value = ActionConstants.ACTION_ENTRY_HOME_PAGE, modelName = "app")
 public class HomeEnteryAction implements ScAction {
     @Override
     public void invoke(Context context, Bundle bundle, String s, ScCallBack scCallback) {

@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import com.yqing.serverCenter.EasySCM;
-import com.yqing.serverCenter.ScCallBack;
+import com.yqing.servercenter.EasySCM;
+import com.yqing.servercenter.ScCallBack;
 
 
 public class SplashActivity extends AppCompatActivity {

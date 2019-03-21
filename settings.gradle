@@ -1,1 +1,1 @@
-include ':app', ':EScmApi', ':EScmComplier', ':EScmAnnotations', ':welcome'
+include ':app', ':EScmApi', ':EScmComplier', ':EScmAnnotations', ':welcome', ':commonlib'

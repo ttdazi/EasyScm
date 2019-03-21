@@ -1,20 +1,15 @@
-package com.yqing.serverCenter;
+package com.yqing.servercenter;
 
 import android.content.Context;
 import android.os.Bundle;
 
-import com.yqing.utils.ClassUtils;
-import com.yqing.utils.StringUtils;
-
+import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 
 public class EasySCM {
     private static final EasySCM ourInstance = new EasySCM();
-    private HashMap<String, ScAction> actionMap = new HashMap();
+    private HashMap<String, ScAction> actionMap = new HashMap<>();
     private volatile boolean isReady;
 
     public static EasySCM getInstance() {
@@ -25,23 +20,15 @@ public class EasySCM {
     }
 
     public void init(Context context) {
+        actionMap.clear();
         try {
-            List<String> classFileNames = ClassUtils.getFileNameByPackageName(context, "com.zzy.processor.generated");
-            Iterator var3 = classFileNames.iterator();
-
-            while (var3.hasNext()) {
-                String className = (String) var3.next();
-                String s = Class.forName(className).newInstance().toString();
-                Map<String, String> map = StringUtils.mapStringToMap(s);
-                Iterator var7 = map.entrySet().iterator();
-
-                while (var7.hasNext()) {
-                    Map.Entry<String, String> entry = (Map.Entry) var7.next();
-                    Class clazz = Class.forName(entry.getValue());
-                    this.registerAction((entry.getKey()).trim(), (ScAction) clazz.newInstance());
-                }
+            Class<?> aClass = Class.forName(EscmConstants.ROUTTABLE_PACKAGE + "."+EscmConstants.ROUT_TABLE);
+            Field[] fields = aClass.getFields();
+            for (Field field : fields) {
+                String name = field.getName();
+                String pathAction = (String) field.get(name);
+                registerAction(name, (ScAction) Class.forName(pathAction).newInstance());
             }
-
             this.isReady = true;
         } catch (Exception var10) {
             var10.printStackTrace();
@@ -73,7 +60,6 @@ public class EasySCM {
             if (!this.actionMap.containsKey(action)) {
                 this.actionMap.put(action, scAction);
             }
-
         } else {
             throw new Exception("bad input param!");
         }

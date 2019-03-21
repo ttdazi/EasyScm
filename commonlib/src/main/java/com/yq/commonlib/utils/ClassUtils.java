@@ -1,4 +1,4 @@
-package com.yqing.utils;
+package com.yq.commonlib.utils;
 
 
 import android.content.Context;
@@ -21,15 +21,11 @@ import java.util.regex.Pattern;
 
 import dalvik.system.DexFile;
 
+/**
+ * class 专用类
+ */
 public class ClassUtils {
-    private static final String TAG = "ClassUtils";
-    private static final String EXTRACTED_NAME_EXT = ".classes";
-    private static final String EXTRACTED_SUFFIX = ".zip";
     private static final String SECONDARY_FOLDER_NAME;
-    private static final String PREFS_FILE = "multidex.version";
-    private static final String KEY_DEX_NUMBER = "dex.number";
-    private static final int VM_WITH_MULTIDEX_VERSION_MAJOR = 2;
-    private static final int VM_WITH_MULTIDEX_VERSION_MINOR = 1;
 
     public ClassUtils() {
     }
@@ -95,6 +91,15 @@ public class ClassUtils {
         return objectList;
     }
 
+    /**
+     * 获取当前包下的所有的类
+     *
+     * @param context
+     * @param packageName
+     * @return
+     * @throws NameNotFoundException
+     * @throws IOException
+     */
     public static List<String> getFileNameByPackageName(Context context, String packageName) throws NameNotFoundException, IOException {
         List<String> classNames = new ArrayList();
         Iterator var3 = getSourcePaths(context).iterator();

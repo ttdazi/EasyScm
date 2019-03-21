@@ -1,4 +1,4 @@
-package com.yqing.serverCenter;
+package com.yqing.servercenter;
 
 import android.os.Bundle;
 

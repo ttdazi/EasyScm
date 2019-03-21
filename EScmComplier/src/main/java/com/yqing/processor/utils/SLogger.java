@@ -1,5 +1,5 @@
 
-package com.yqing.processor;
+package com.yqing.processor.utils;
 
 import javax.annotation.processing.Messager;
 import javax.tools.Diagnostic.Kind;
