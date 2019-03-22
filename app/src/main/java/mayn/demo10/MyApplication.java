@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
-import com.yqing.servercenter.EasySCM;
+import com.aidazi.servercenter.EasySCM;
 
 
 /**
