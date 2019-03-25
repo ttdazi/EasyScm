@@ -6,6 +6,6 @@ package com.aidazi.servercenter;
  */
 public class EscmConstants {
 
-    public static final String ROUTTABLE_PACKAGE = "com.yqing.scmapi";
+    public static final String ROUTTABLE_PACKAGE = "com.aidazi.scmapi";
     public static final String ROUT_TABLE = "RoutTable";
 }

@@ -6,12 +6,6 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath = true
-                arguments = [moduleName: project.getName()]
-            }
-        }
     }
 
     buildTypes {
@@ -28,7 +22,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation project(':escm-api')
-    annotationProcessor project(':escm-annotations')
-    api project(':escm-complier')
+    implementation project(':escm-annotations')
+    annotationProcessor project(':escm-complier')
 
 }

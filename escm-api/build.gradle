@@ -23,7 +23,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':escm-annotations')
+    implementation project(path : ':escm-annotations')
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
 
 }

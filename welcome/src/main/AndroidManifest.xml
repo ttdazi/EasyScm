@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.aidazi.welcome.SplashActivity"
-            android:process=":welcome">
+           >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

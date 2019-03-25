@@ -20,7 +20,7 @@ public class SLogger {
     }
 
     public void info(CharSequence info) {
-        if (isLoger && info != null) {
+        if (info != null) {
             this.msg.printMessage(Kind.NOTE, "SCM :: processors ::" + info);
         }
 

@@ -20,18 +20,49 @@ public class EasySCM {
     }
 
     public void init(Context context) {
+        if (isReady) return;
         actionMap.clear();
         try {
-            Class<?> aClass = Class.forName(EscmConstants.ROUTTABLE_PACKAGE + "." + EscmConstants.ROUT_TABLE);
+            Object o = Class.forName(EscmConstants.ROUTTABLE_PACKAGE + "." + EscmConstants.ROUT_TABLE).newInstance();
+            String tableKeyStr = o.toString();
+            praseStringKey(tableKeyStr);
+            this.isReady = true;
+        } catch (Exception var10) {
+            var10.printStackTrace();
+        }
+
+    }
+
+    private void praseStringKey(String tableKeyStr) {
+        if (tableKeyStr == null || tableKeyStr.length() == 0) return;
+        String[] split = tableKeyStr.split(",");
+        try {
+            for (int i = 0; i < split.length; i++) {
+                String sValue = split[i];
+                if (sValue != null && sValue.length() != 0) {
+                    String[] splitGroup = sValue.split("=");
+                    registerAction(splitGroup[0], (ScAction) Class.forName(splitGroup[1]).newInstance());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void praseFile() {
+        Class<?> aClass = null;
+        try {
+            aClass = Class.forName(EscmConstants.ROUTTABLE_PACKAGE + "." + EscmConstants.ROUT_TABLE);
             Field[] fields = aClass.getFields();
             for (Field field : fields) {
                 String name = field.getName();
                 String pathAction = (String) field.get(name);
                 registerAction(name, (ScAction) Class.forName(pathAction).newInstance());
             }
-            this.isReady = true;
-        } catch (Exception var10) {
-            var10.printStackTrace();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

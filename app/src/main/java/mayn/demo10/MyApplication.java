@@ -16,6 +16,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         EasySCM.getInstance().init(this);
+
+
     }
 
     @Override
