@@ -59,8 +59,6 @@ public class EasySCM {
                 String pathAction = (String) field.get(name);
                 registerAction(name, (ScAction) Class.forName(pathAction).newInstance());
             }
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

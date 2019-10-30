@@ -38,7 +38,6 @@ public class ScActionProcessor extends AbstractProcessor {
         super.init(processingEnv);
         this.mFiler = processingEnv.getFiler();
         this.logger = new SLogger(processingEnv.getMessager());
-        this.logger.setLoger(true);
         this.logger.info(">>> ScActionProcessor init. <<<");
 
     }
@@ -81,7 +80,6 @@ public class ScActionProcessor extends AbstractProcessor {
             String clazzName = typeElement.getQualifiedName().toString();
             this.logger.info(">>> found action :" + actionName + " in class :" + clazzName);
             sb.append(actionName + "=" + clazzName + ",");
-            sb.append(actionName+"1" + "=" + clazzName + ",");
             this.logger.info(">>>-----map :" + " in class :" + sb);
         }
         return sb;
