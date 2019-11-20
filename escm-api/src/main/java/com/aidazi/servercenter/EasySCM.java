@@ -5,12 +5,13 @@ import android.os.Bundle;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class EasySCM {
     private static final EasySCM ourInstance = new EasySCM();
     private HashMap<String, ScAction> actionMap = new HashMap<>();
-    private volatile boolean isReady;
+    private static final AtomicBoolean initialized = new AtomicBoolean();
 
     public static EasySCM getInstance() {
         return ourInstance;
@@ -20,17 +21,16 @@ public class EasySCM {
     }
 
     public void init(Context context) {
-        if (isReady) return;
-        actionMap.clear();
-        try {
-            Object o = Class.forName(EscmConstants.ROUTTABLE_PACKAGE + "." + EscmConstants.ROUT_TABLE).newInstance();
-            String tableKeyStr = o.toString();
-            praseStringKey(tableKeyStr);
-            this.isReady = true;
-        } catch (Exception var10) {
-            var10.printStackTrace();
+        if (!initialized.getAndSet(true)) {
+            actionMap.clear();
+            try {
+                Object o = Class.forName(EscmConstants.ROUTTABLE_PACKAGE + "." + EscmConstants.ROUT_TABLE).newInstance();
+                String tableKeyStr = o.toString();
+                praseStringKey(tableKeyStr);
+            } catch (Exception var10) {
+                var10.printStackTrace();
+            }
         }
-
     }
 
     private void praseStringKey(String tableKeyStr) {
@@ -74,7 +74,7 @@ public class EasySCM {
     }
 
     public void req(Context context, String action, Bundle param, String tag, ScCallBack callback) throws Exception {
-        if (!this.isReady) {
+        if (!initialized.get()) {
             throw new RuntimeException("EasySCM is not ready! pls wait!");
         } else if (!this.actionMap.containsKey(action)) {
             throw new RuntimeException("EasySCM action not found! name:" + action);
