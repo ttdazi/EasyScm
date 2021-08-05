@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -31,6 +32,29 @@ public class EasySCM {
                 var10.printStackTrace();
             }
         }
+    }
+
+    public void initASM(Context context) {
+        if (!initialized.getAndSet(true)) {
+            actionMap.clear();
+            HashMap<String, String> map = new HashMap<>();
+            loadInto(map);
+            try {
+                for (String key : map.keySet()) {
+                    registerAction(key, (ScAction) Class.forName(map.get(key)).newInstance());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 用于动态映射表的生成
+     * @param map
+     */
+    void loadInto(Map<String, String> map) {
+        throw new RuntimeException("加载Router映射错误！");
     }
 
     private void praseStringKey(String tableKeyStr) {

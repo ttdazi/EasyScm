@@ -1,1 +1,2 @@
+include ':asmtransform'
 include ':app', ':escm-api', ':escm-complier', ':escm-annotations', ':welcome', ':commonlib'
